@@ -1,0 +1,33 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  rooms: 1
+  property_id: 1
+  price: 1
+  adress_line1: MyText
+  adress_line2: MyText
+  postcode: MyText
+  city: MyString
+  country: MyString
+  longitude: 1
+  latitude: 1
+  available: false
+  start_date: 2017-09-02
+  end_date: 2017-09-02
+
+two:
+  user_id: 1
+  rooms: 1
+  property_id: 1
+  price: 1
+  adress_line1: MyText
+  adress_line2: MyText
+  postcode: MyText
+  city: MyString
+  country: MyString
+  longitude: 1
+  latitude: 1
+  available: false
+  start_date: 2017-09-02
+  end_date: 2017-09-02

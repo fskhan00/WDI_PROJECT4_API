@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  review_id: 1
+  user_id: 1
+  submitter_id: 1
+  review: MyText
+  review_date: 2017-09-02
+  ranking: 1
+
+two:
+  review_id: 1
+  user_id: 1
+  submitter_id: 1
+  review: MyText
+  review_date: 2017-09-02
+  ranking: 1
