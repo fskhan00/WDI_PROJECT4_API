@@ -1,3 +1,6 @@
 class RequestSerializer < ActiveModel::Serializer
-  attributes :id, :request_id, :user_id, :property_id, :status, :request_date, :approval_date
+  attributes :id, :approved, :request_date, :approval_date, :sender_id, :receiver_id, :sender, :receiver, :rental, :status
+  has_one :rental
+  has_one :sender
+  has_one :receiver
 end

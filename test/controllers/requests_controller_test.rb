@@ -12,7 +12,7 @@ class RequestsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create request" do
     assert_difference('Request.count') do
-      post requests_url, params: { request: { approval_date: @request.approval_date, property_id: @request.property_id, request_date: @request.request_date, request_id: @request.request_id, status: @request.status, user_id: @request.user_id } }, as: :json
+      post requests_url, params: { request: { approval_date: @request.approval_date, approved: @request.approved, rental_id: @request.rental_id, request_date: @request.request_date, user_id: @request.user_id } }, as: :json
     end
 
     assert_response 201
@@ -24,7 +24,7 @@ class RequestsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update request" do
-    patch request_url(@request), params: { request: { approval_date: @request.approval_date, property_id: @request.property_id, request_date: @request.request_date, request_id: @request.request_id, status: @request.status, user_id: @request.user_id } }, as: :json
+    patch request_url(@request), params: { request: { approval_date: @request.approval_date, approved: @request.approved, rental_id: @request.rental_id, request_date: @request.request_date, user_id: @request.user_id } }, as: :json
     assert_response 200
   end
 

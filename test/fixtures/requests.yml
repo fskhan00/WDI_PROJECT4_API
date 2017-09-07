@@ -1,17 +1,15 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  request_id: 1
-  user_id: 1
-  property_id: 1
-  status: false
-  request_date: 2017-09-02
-  approval_date: 2017-09-02
+  approved: false
+  request_date: 2017-09-04
+  approval_date: 2017-09-04
+  rental: one
+  user: one
 
 two:
-  request_id: 1
-  user_id: 1
-  property_id: 1
-  status: false
-  request_date: 2017-09-02
-  approval_date: 2017-09-02
+  approved: false
+  request_date: 2017-09-04
+  approval_date: 2017-09-04
+  rental: two
+  user: two

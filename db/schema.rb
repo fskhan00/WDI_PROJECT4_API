@@ -10,72 +10,77 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170903133438) do
+ActiveRecord::Schema.define(version: 20170906171753) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "images", force: :cascade do |t|
-    t.integer "image_id"
-    t.integer "property_id"
-    t.string "src"
+  create_table "pictures", force: :cascade do |t|
+    t.string "imagefile"
+    t.string "description"
     t.string "alt"
-    t.text "description"
+    t.bigint "rental_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["rental_id"], name: "index_pictures_on_rental_id"
   end
 
-  create_table "properties", force: :cascade do |t|
-    t.integer "user_id"
+  create_table "rentals", force: :cascade do |t|
     t.integer "rooms"
-    t.integer "property_id"
-    t.integer "price"
-    t.text "adress_line1"
-    t.text "adress_line2"
-    t.text "postcode"
+    t.decimal "price"
+    t.string "address_line1"
+    t.string "address_line2"
     t.string "city"
+    t.string "post_code"
     t.string "country"
-    t.integer "longitude"
-    t.integer "latitude"
+    t.decimal "lat"
+    t.decimal "long"
     t.boolean "available"
     t.date "start_date"
     t.date "end_date"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "image"
+    t.index ["user_id"], name: "index_rentals_on_user_id"
   end
 
   create_table "requests", force: :cascade do |t|
-    t.integer "request_id"
-    t.integer "user_id"
-    t.integer "property_id"
-    t.boolean "status"
+    t.boolean "approved"
     t.date "request_date"
     t.date "approval_date"
+    t.bigint "rental_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "sender_id"
+    t.integer "receiver_id"
+    t.string "status"
+    t.index ["rental_id"], name: "index_requests_on_rental_id"
   end
 
   create_table "reviews", force: :cascade do |t|
-    t.integer "review_id"
-    t.integer "user_id"
-    t.integer "submitter_id"
-    t.text "review"
-    t.date "review_date"
     t.integer "ranking"
+    t.text "review"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "rental_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
-    t.serial "user_id", null: false
+    t.string "email"
     t.string "first_name"
     t.string "last_name"
-    t.string "password"
-    t.text "image"
+    t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "email"
-    t.string "password_digest"
+    t.string "username"
+    t.text "image"
   end
 
+  add_foreign_key "pictures", "rentals"
+  add_foreign_key "rentals", "users"
+  add_foreign_key "requests", "rentals"
+  add_foreign_key "reviews", "users"
 end

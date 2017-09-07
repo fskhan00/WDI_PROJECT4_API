@@ -1,18 +1,6 @@
 class RequestsController < ApplicationController
   before_action :set_request, only: [:show, :update, :destroy]
 
-  # GET /requests
-  def index
-    @requests = Request.all
-
-    render json: @requests
-  end
-
-  # GET /requests/1
-  def show
-    render json: @request
-  end
-
   # POST /requests
   def create
     @request = Request.new(request_params)
@@ -38,6 +26,28 @@ class RequestsController < ApplicationController
     @request.destroy
   end
 
+  def accept
+    @request = Request.find(params[:id])
+    @request.status = "Accepted"
+
+    if @request.save
+      render json: @request, status: :created, location: @request
+    else
+      render json: @request.errors, status: :unprocessable_entity
+    end
+  end
+
+  def reject
+    @request = Request.find(params[:id])
+    @request.status = "Rejected"
+
+    if @request.save
+      render json: @request, status: :created, location: @request
+    else
+      render json: @request.errors, status: :unprocessable_entity
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_request
@@ -46,6 +56,6 @@ class RequestsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def request_params
-      params.require(:request).permit(:request_id, :user_id, :property_id, :status, :request_date, :approval_date)
+      params.require(:request).permit(:approved, :request_date, :approval_date, :rental_id, :sender_id, :receiver_id, :status)
     end
 end
